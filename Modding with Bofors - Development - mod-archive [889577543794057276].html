@@ -1,0 +1,3110 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Modding with Bofors - mod-archive</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #2f3136;
+            color: #b9bbbe;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #7289da;
+            background-color: rgba(114, 137, 218, .1);
+            font-weight: 500;
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #ffffff;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+        }
+
+        .chatlog__author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #2f3136;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(46, 48, 54, 0.3);
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0.1em;
+            padding: 0.2em 0.35em;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/807676502832578560/512afc8611ccefe7e9db2edc1760eac4.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Modding with Bofors</div>
+        <div class="preamble__entry">Development / mod-archive</div>
+
+            <div class="preamble__entry preamble__entry--small">Archive of all NavalArt mods</div>
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">18-Oct-21 07:50 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="899806734833561610" id="message-899806734833561610" title="Message sent: 18-Oct-21 07:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">British 40mm Bofors AA Pack</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899806808707846154" id="message-899806808707846154" title="Message sent: 18-Oct-21 07:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: False Falsette</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899806928786558996" id="message-899806928786558996" title="Message sent: 18-Oct-21 07:51 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899806927868002344/NavalArt_2020-03-25_16-38-12.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899806927868002344/NavalArt_2020-03-25_16-38-12.png" alt="Image attachment" title="Image: NavalArt_2020-03-25_16-38-12.png (3.28 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899808674636242954" id="message-899808674636242954" title="Message sent: 18-Oct-21 07:58 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: A collection of 40mm Bofors AA used in British ships. Ported from World of Warships.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899808977091690606" id="message-899808977091690606" title="Message sent: 18-Oct-21 07:59 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899808976756150283/British_40mm_Bofors_AA_Pack.zip">
+                                        British_40mm_Bofors_AA_Pack.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    1.13 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899809055818780762" id="message-899809055818780762" title="Message sent: 18-Oct-21 07:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Oct-21 08:00 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899809634058108958" id="message-899809634058108958" title="Message sent: 18-Oct-21 08:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Plane Mod Pack</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899809656824811530" id="message-899809656824811530" title="Message sent: 18-Oct-21 08:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Hyperschnizel</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899809715557646386" id="message-899809715557646386" title="Message sent: 18-Oct-21 08:02 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899809715243069480/presentoire_mod_v1.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899809715243069480/presentoire_mod_v1.png" alt="Image attachment" title="Image: presentoire_mod_v1.png (715.05 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899809825901391883" id="message-899809825901391883" title="Message sent: 18-Oct-21 08:03 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: First version of a plane (decoration only for now) mod ; (around 3k poly each)
+ currently there are some issues with the game : 
+- some planes spawn high due to boxcollider size
+- They will loose their texture since the first sea trial but will keep their ingame color
+<img loading="lazy" class="emoji " alt="🇺🇸" title="flag_us" src="https://twemoji.maxcdn.com/2/svg/1f1fa-1f1f8.svg">  TBD Devastator / SB2C Helldiver / F4F Wildcat
+<img loading="lazy" class="emoji " alt="🇯🇵" title="flag_jp" src="https://twemoji.maxcdn.com/2/svg/1f1ef-1f1f5.svg"> A6M2 Zero / D3A2 Val / B5N2 Kate / D4Y Judy / F1M Pete</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Oct-21 08:03 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899810019233652756" id="message-899810019233652756" title="Message sent: 18-Oct-21 08:03 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899810018529005578/Plane_Mod.zip">
+                                        Plane_Mod.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    6.59 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899810387724234783" id="message-899810387724234783" title="Message sent: 18-Oct-21 08:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899810412919423017" id="message-899810412919423017" title="Message sent: 18-Oct-21 08:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Dome Pack</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899810474705702913" id="message-899810474705702913" title="Message sent: 18-Oct-21 08:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Oukarine</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899810526626988073" id="message-899810526626988073" title="Message sent: 18-Oct-21 08:05 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899810526710882324/20200427140254_1.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899810526710882324/20200427140254_1.png" alt="Image attachment" title="Image: 20200427140254_1.png (590.46 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899811429257994281" id="message-899811429257994281" title="Message sent: 18-Oct-21 08:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: 
+-15in x2
+-200mm x4</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899811472253812797" id="message-899811472253812797" title="Message sent: 18-Oct-21 08:09 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899811472048275456/Dome_Pack.zip">
+                                        Dome_Pack.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    457.19 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899811678080893018" id="message-899811678080893018" title="Message sent: 18-Oct-21 08:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899811975637368842" id="message-899811975637368842" title="Message sent: 18-Oct-21 08:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">British QF 2-pounder Mark V-VI &amp;  British QF 4in Mark XVI</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Oct-21 08:13 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899812009619628052" id="message-899812009619628052" title="Message sent: 18-Oct-21 08:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: False Falsette</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899812156621611058" id="message-899812156621611058" title="Message sent: 18-Oct-21 08:12 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899812156244103199/NavalArt_2020-05-05_17-01-16.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899812156244103199/NavalArt_2020-05-05_17-01-16.png" alt="Image attachment" title="Image: NavalArt_2020-05-05_17-01-16.png (841.15 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899812823792754688" id="message-899812823792754688" title="Message sent: 18-Oct-21 08:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: British QF 2-pounder Mark V-VI &amp;  British QF 4in Mark XVI ported from WoWs.</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Oct-21 08:15 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899812850065879111" id="message-899812850065879111" title="Message sent: 18-Oct-21 08:15 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899812849868738560/British_QF_2-pounder_Mark_V-VI.zip">
+                                        British_QF_2-pounder_Mark_V-VI.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    533.87 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899812852330790942" id="message-899812852330790942" title="Message sent: 18-Oct-21 08:15 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899812852116905994/British_QF_4in_Mark_XVI.zip">
+                                        British_QF_4in_Mark_XVI.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    614.38 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899813267764023297" id="message-899813267764023297" title="Message sent: 18-Oct-21 08:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899813388799070298" id="message-899813388799070298" title="Message sent: 18-Oct-21 08:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">British BL 15in Mark I Pack</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899813413067325460" id="message-899813413067325460" title="Message sent: 18-Oct-21 08:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: False Falsette</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899813567275106374" id="message-899813567275106374" title="Message sent: 18-Oct-21 08:17 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899813567010832394/NavalArt_2020-05-05_16-59-45.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899813567010832394/NavalArt_2020-05-05_16-59-45.png" alt="Image attachment" title="Image: NavalArt_2020-05-05_16-59-45.png (1.1 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899813732639719444" id="message-899813732639719444" title="Message sent: 18-Oct-21 08:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: British BL 15in Mark I ported from WoWs.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899813802814623774" id="message-899813802814623774" title="Message sent: 18-Oct-21 08:18 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899813802533609492/British_BL_15in_Mark_I_Pack.zip">
+                                        British_BL_15in_Mark_I_Pack.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    955.67 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899813842958303264" id="message-899813842958303264" title="Message sent: 18-Oct-21 08:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814153995309167" id="message-899814153995309167" title="Message sent: 18-Oct-21 08:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">British QF 5.25in Mark I (Vanguard)</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814171535872071" id="message-899814171535872071" title="Message sent: 18-Oct-21 08:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: False Falsette</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814241673044019" id="message-899814241673044019" title="Message sent: 18-Oct-21 08:20 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899814241656270878/NavalArt_2020-06-02_02-02-55.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899814241656270878/NavalArt_2020-06-02_02-02-55.png" alt="Image attachment" title="Image: NavalArt_2020-06-02_02-02-55.png (3.44 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814401622827028" id="message-899814401622827028" title="Message sent: 18-Oct-21 08:21 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: British QF 5.25in Mark I ported from WoWs.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814459692957707" id="message-899814459692957707" title="Message sent: 18-Oct-21 08:21 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899814459500027954/British_QF_5.25in_Mark_I_Vanguard.zip">
+                                        British_QF_5.25in_Mark_I_Vanguard.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    313.02 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814486054158346" id="message-899814486054158346" title="Message sent: 18-Oct-21 08:21 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814752304390204" id="message-899814752304390204" title="Message sent: 18-Oct-21 08:22 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Nubby&#39;s Mod</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814824865841182" id="message-899814824865841182" title="Message sent: 18-Oct-21 08:22 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Nubby5</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899814873209397309" id="message-899814873209397309" title="Message sent: 18-Oct-21 08:23 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899814872722862090/20200625185639_1.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899814872722862090/20200625185639_1.png" alt="Image attachment" title="Image: 20200625185639_1.png (908.89 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899815014146388009" id="message-899815014146388009" title="Message sent: 18-Oct-21 08:23 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: Shoutout to Frolonov for making this work. It is simply a decorational rangefinder that does not move with the guns.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899815043628158996" id="message-899815043628158996" title="Message sent: 18-Oct-21 08:23 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899815043351318558/Nubby_03.zip">
+                                        Nubby_03.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    114.12 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899815085529239563" id="message-899815085529239563" title="Message sent: 18-Oct-21 08:23 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899816526541115392" id="message-899816526541115392" title="Message sent: 18-Oct-21 08:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Cannon Ball</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899816555163045888" id="message-899816555163045888" title="Message sent: 18-Oct-21 08:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Oukarine</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">18-Oct-21 08:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="899818606257373235" id="message-899818606257373235" title="Message sent: 18-Oct-21 08:37 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899818606018330744/20200709190648_1.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899818606018330744/20200709190648_1.png" alt="Image attachment" title="Image: 20200709190648_1.png (387.85 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899818694077710417" id="message-899818694077710417" title="Message sent: 18-Oct-21 08:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: Cannon Ball.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899818757252325396" id="message-899818757252325396" title="Message sent: 18-Oct-21 08:38 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899818757030039613/Cannon_Ball.zip">
+                                        Cannon_Ball.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    876.62 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899818810729697310" id="message-899818810729697310" title="Message sent: 18-Oct-21 08:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">18-Oct-21 08:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="899822709821812746" id="message-899822709821812746" title="Message sent: 18-Oct-21 08:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Big Cannon</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899822737403555850" id="message-899822737403555850" title="Message sent: 18-Oct-21 08:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Oukarine</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899824179052970024" id="message-899824179052970024" title="Message sent: 18-Oct-21 09:00 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899824178566402119/00000000026.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899824178566402119/00000000026.png" alt="Image attachment" title="Image: 00000000026.png (200.66 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899824581060218972" id="message-899824581060218972" title="Message sent: 18-Oct-21 09:01 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: It just one big cannon, nothing more... .</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899824671103524914" id="message-899824671103524914" title="Message sent: 18-Oct-21 09:01 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899824670822498314/Little_Big.zip">
+                                        Little_Big.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    577.21 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899825073060462593" id="message-899825073060462593" title="Message sent: 18-Oct-21 09:03 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899825514540302346" id="message-899825514540302346" title="Message sent: 18-Oct-21 09:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Battleship Rudder</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899825545632686121" id="message-899825545632686121" title="Message sent: 18-Oct-21 09:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Trocky</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899826383725953036" id="message-899826383725953036" title="Message sent: 18-Oct-21 09:08 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/899826383503642714/Screenshot_852.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/899826383503642714/Screenshot_852.png" alt="Image attachment" title="Image: Screenshot_852.png (480.56 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="899826617868771339" id="message-899826617868771339" title="Message sent: 18-Oct-21 09:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: This is a semi-balanced larger rudder suited for battleships.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">18-Oct-21 09:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="899832066923962409" id="message-899832066923962409" title="Message sent: 18-Oct-21 09:31 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/899832066915598367/Rudder_Test.zip">
+                                        Rudder_Test.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    48.08 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">19-Oct-21 10:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="900025292226195547" id="message-900025292226195547" title="Message sent: 19-Oct-21 10:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900025363269320745" id="message-900025363269320745" title="Message sent: 19-Oct-21 10:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Dual 420mm Turret</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900025486716059649" id="message-900025486716059649" title="Message sent: 19-Oct-21 10:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LaM&#39;s Heavy Industries</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 10:34 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900025557822099467" id="message-900025557822099467" title="Message sent: 19-Oct-21 10:20 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900025557943713864/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900025557943713864/unknown.png" alt="Image attachment" title="Image: unknown.png (208.56 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900025627049082971" id="message-900025627049082971" title="Message sent: 19-Oct-21 10:20 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: Long range highly accurate cannon designed for bombardment of enemies ships or inland structures.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900025696322207744" id="message-900025696322207744" title="Message sent: 19-Oct-21 10:20 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900025696108302388/Dual_420mm_Turret.zip">
+                                        Dual_420mm_Turret.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    90.5 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900025723073486849" id="message-900025723073486849" title="Message sent: 19-Oct-21 10:20 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900026059968364614" id="message-900026059968364614" title="Message sent: 19-Oct-21 10:22 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Dual 1000mm Cram Cannon</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900026098732113991" id="message-900026098732113991" title="Message sent: 19-Oct-21 10:22 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LaM&#39;s Heavy Industries</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 10:34 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900026199592542239" id="message-900026199592542239" title="Message sent: 19-Oct-21 10:22 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900026199873564692/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900026199873564692/unknown.png" alt="Image attachment" title="Image: unknown.png (154.39 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900026340202401842" id="message-900026340202401842" title="Message sent: 19-Oct-21 10:23 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: A heavily armoured cram cannon designed for mid-range bombardement of inland structures and has very high accuracy.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900026404392009778" id="message-900026404392009778" title="Message sent: 19-Oct-21 10:23 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900026404123578378/Dual_1000mm_Cram_cannon.zip">
+                                        Dual_1000mm_Cram_cannon.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    220.3 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900027171060473888" id="message-900027171060473888" title="Message sent: 19-Oct-21 10:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900027235128459324" id="message-900027235128459324" title="Message sent: 19-Oct-21 10:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">230mm Quad barrel Autocannon</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 10:28 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900027272399032330" id="message-900027272399032330" title="Message sent: 19-Oct-21 10:27 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LaM&#39;s Heavy Industries</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 10:34 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900027321048788993" id="message-900027321048788993" title="Message sent: 19-Oct-21 10:27 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900027318750289940/AAAA.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900027318750289940/AAAA.png" alt="Image attachment" title="Image: AAAA.png (86.49 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900027417505189938" id="message-900027417505189938" title="Message sent: 19-Oct-21 10:27 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: A 230mm quad auto cannon catered towards AA and general purpose warfare.</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 10:27 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900027626339594240" id="message-900027626339594240" title="Message sent: 19-Oct-21 10:28 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900027625920151653/LaMs_heavy_industries.zip">
+                                        LaMs_heavy_industries.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    425.81 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900027921471787079" id="message-900027921471787079" title="Message sent: 19-Oct-21 10:29 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028117651963934" id="message-900028117651963934" title="Message sent: 19-Oct-21 10:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">1700mm Triple barrel Devestator Class Cannon</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028137855938611" id="message-900028137855938611" title="Message sent: 19-Oct-21 10:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LaM&#39;s Heavy Industries</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 10:33 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028197020794941" id="message-900028197020794941" title="Message sent: 19-Oct-21 10:30 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900028196827844618/p864965.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900028196827844618/p864965.png" alt="Image attachment" title="Image: p864965.png (187.18 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028279501774978" id="message-900028279501774978" title="Message sent: 19-Oct-21 10:31 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: A highly specialized type of turret that was made by the order of the high court designed for long range bombardment of enemy fortification.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028351484399646" id="message-900028351484399646" title="Message sent: 19-Oct-21 10:31 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900028351270486016/1700mm_Triple_barrel_Devestator_Class_cannon.zip">
+                                        1700mm_Triple_barrel_Devestator_Class_cannon.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    357.81 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028374867648532" id="message-900028374867648532" title="Message sent: 19-Oct-21 10:31 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028805865930814" id="message-900028805865930814" title="Message sent: 19-Oct-21 10:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">1700mm Tri Abyssal class Cannon</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900028909972754502" id="message-900028909972754502" title="Message sent: 19-Oct-21 10:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LaM&#39;s Heavy Industries</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900029257185652836" id="message-900029257185652836" title="Message sent: 19-Oct-21 10:34 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900029256946552832/p236311.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900029256946552832/p236311.png" alt="Image attachment" title="Image: p236311.png (122.77 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900029401364832276" id="message-900029401364832276" title="Message sent: 19-Oct-21 10:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: An experimental 9 barrel 3 turret battery.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900029454020149289" id="message-900029454020149289" title="Message sent: 19-Oct-21 10:35 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900029453843976222/1700mm_Tri_Abyssal_class_Cannon.zip">
+                                        1700mm_Tri_Abyssal_class_Cannon.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    411.25 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">19-Oct-21 11:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="900035639163093073" id="message-900035639163093073" title="Message sent: 19-Oct-21 11:00 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036111211053126" id="message-900036111211053126" title="Message sent: 19-Oct-21 11:02 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">210mm Tri-barrel Cannon</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036129498210304" id="message-900036129498210304" title="Message sent: 19-Oct-21 11:02 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LaM&#39;s Heavy Industries</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036172313682010" id="message-900036172313682010" title="Message sent: 19-Oct-21 11:02 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900036171927797760/p87524.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900036171927797760/p87524.png" alt="Image attachment" title="Image: p87524.png (493.09 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036321224052767" id="message-900036321224052767" title="Message sent: 19-Oct-21 11:03 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: A much more smaller varient of its big bigger brothers.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036348952604702" id="message-900036348952604702" title="Message sent: 19-Oct-21 11:03 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900036348713513020/a_210mm_tri-barrel_cannon.zip">
+                                        a_210mm_tri-barrel_cannon.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    528.92 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036414153039893" id="message-900036414153039893" title="Message sent: 19-Oct-21 11:03 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036626691010590" id="message-900036626691010590" title="Message sent: 19-Oct-21 11:04 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Triple Tri-barrel 369mm Turret</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036649382207508" id="message-900036649382207508" title="Message sent: 19-Oct-21 11:04 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LaM&#39;s Heavy Industries</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036792647036978" id="message-900036792647036978" title="Message sent: 19-Oct-21 11:04 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900036792395370567/coverrr.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900036792395370567/coverrr.png" alt="Image attachment" title="Image: coverrr.png (972.15 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900036905553522778" id="message-900036905553522778" title="Message sent: 19-Oct-21 11:05 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: A much more useable version of the behemoth sized 1700 mm turret that is modeled over.</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 11:06 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900037160307142716" id="message-900037160307142716" title="Message sent: 19-Oct-21 11:06 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900037160110026772/Triple_tri-barrel_369mm_turret.zip">
+                                        Triple_tri-barrel_369mm_turret.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    220.8 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900037239562727434" id="message-900037239562727434" title="Message sent: 19-Oct-21 11:06 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038366194704384" id="message-900038366194704384" title="Message sent: 19-Oct-21 11:11 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Decoration Pack 1</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038420850675763" id="message-900038420850675763" title="Message sent: 19-Oct-21 11:11 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Hyperschnizel</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038470129582090" id="message-900038470129582090" title="Message sent: 19-Oct-21 11:11 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900038469945020486/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900038469945020486/unknown.png" alt="Image attachment" title="Image: unknown.png (434.2 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038553277435945" id="message-900038553277435945" title="Message sent: 19-Oct-21 11:11 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: - Deck decorations (<img loading="lazy" class="emoji " alt="🇯🇵" title="flag_jp" src="https://twemoji.maxcdn.com/2/svg/1f1ef-1f1f5.svg"> <img loading="lazy" class="emoji " alt="🇩🇪" title="flag_de" src="https://twemoji.maxcdn.com/2/svg/1f1e9-1f1ea.svg">) ; Storages, Vents, Hatches, Miscellaneous assets
+- Japanese Large Rudder
+- Bismarck Communications raft, Crane, Anchor</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038689084817440" id="message-900038689084817440" title="Message sent: 19-Oct-21 11:12 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900038688933806120/Deco_Pack_1.zip">
+                                        Deco_Pack_1.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    5.32 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038693484654612" id="message-900038693484654612" title="Message sent: 19-Oct-21 11:12 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038894274367509" id="message-900038894274367509" title="Message sent: 19-Oct-21 11:13 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Decoration Pack 1 Extentions</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900038942404001852" id="message-900038942404001852" title="Message sent: 19-Oct-21 11:13 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Hyperschnizel</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900039010964078632" id="message-900039010964078632" title="Message sent: 19-Oct-21 11:13 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900039010750193694/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900039010750193694/unknown.png" alt="Image attachment" title="Image: unknown.png (641.07 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">19-Oct-21 11:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="900040833754079272" id="message-900040833754079272" title="Message sent: 19-Oct-21 11:20 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: Some extensions for the Deco Pack V.1 ;
+- Deco Pack extension : German &amp; British spotlights, British bulkhead fittings &amp; windows
+- ASW Decorations : German &amp; American depth charge thrower, American Hedgehog &amp; British Squid mortar
+- German Communication Boats : 5.6m, 7.5m, 8.2m and 9.2m long motorboats</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 11:21 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900042335377817651" id="message-900042335377817651" title="Message sent: 19-Oct-21 11:26 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900042334853541988/Deco_Pack_Extension.zip">
+                                        Deco_Pack_Extension.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    5.65 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900042506958434355" id="message-900042506958434355" title="Message sent: 19-Oct-21 11:27 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900042506740310056/ASW_Decorations.zip">
+                                        ASW_Decorations.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    3.16 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900042658133704735" id="message-900042658133704735" title="Message sent: 19-Oct-21 11:28 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900042657609433158/German_Communication_Boat.zip">
+                                        German_Communication_Boat.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    3.67 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900042723598409819" id="message-900042723598409819" title="Message sent: 19-Oct-21 11:28 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900043194618757130" id="message-900043194618757130" title="Message sent: 19-Oct-21 11:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ACE Combat Flags and YF 22</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900043242601611295" id="message-900043242601611295" title="Message sent: 19-Oct-21 11:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Skanct</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900043284867600404" id="message-900043284867600404" title="Message sent: 19-Oct-21 11:30 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900043284708225064/C4DNSY0DEXG_F94HBJ.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900043284708225064/C4DNSY0DEXG_F94HBJ.png" alt="Image attachment" title="Image: C4DNSY0DEXG_F94HBJ.png (254.69 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900043342287634472" id="message-900043342287634472" title="Message sent: 19-Oct-21 11:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: YF22 and some national flags in Ace Combat.</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 11:31 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900043437267619850" id="message-900043437267619850" title="Message sent: 19-Oct-21 11:31 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900043437032734750/ACE_Combat_Flags_and_YF_22.zip">
+                                        ACE_Combat_Flags_and_YF_22.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    793.24 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900043969440923671" id="message-900043969440923671" title="Message sent: 19-Oct-21 11:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044049237565480" id="message-900044049237565480" title="Message sent: 19-Oct-21 11:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Space Battleship Yamato Weapon Pack</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044144540545054" id="message-900044144540545054" title="Message sent: 19-Oct-21 11:34 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: okita13</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044181291008061" id="message-900044181291008061" title="Message sent: 19-Oct-21 11:34 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900044181051965460/PCTYLJDO4IVPX6WS4.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900044181051965460/PCTYLJDO4IVPX6WS4.png" alt="Image attachment" title="Image: PCTYLJDO4IVPX6WS4.png (507.58 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044599496675418" id="message-900044599496675418" title="Message sent: 19-Oct-21 11:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: A collection of weapons modelled after Space Battleship Yamato.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044637547397130" id="message-900044637547397130" title="Message sent: 19-Oct-21 11:36 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900044637304135711/space_battleship_yamato.zip">
+                                        space_battleship_yamato.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    1.05 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044665166897223" id="message-900044665166897223" title="Message sent: 19-Oct-21 11:36 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044915575255051" id="message-900044915575255051" title="Message sent: 19-Oct-21 11:37 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">R3 T20 FA-HS</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900044958453600276" id="message-900044958453600276" title="Message sent: 19-Oct-21 11:37 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: LiBF4</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900045038145388624" id="message-900045038145388624" title="Message sent: 19-Oct-21 11:37 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900045037658832926/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900045037658832926/unknown.png" alt="Image attachment" title="Image: unknown.png (2.11 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900045288121716756" id="message-900045288121716756" title="Message sent: 19-Oct-21 11:38 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: OTO R3 T20 FA-HS.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900045344228933763" id="message-900045344228933763" title="Message sent: 19-Oct-21 11:38 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900045343910141953/R3_T20_FA-HS.zip">
+                                        R3_T20_FA-HS.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    1.99 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900045419550224464" id="message-900045419550224464" title="Message sent: 19-Oct-21 11:39 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900045993419100180" id="message-900045993419100180" title="Message sent: 19-Oct-21 11:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">HarryT Modpack 1.1</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900046021189586985" id="message-900046021189586985" title="Message sent: 19-Oct-21 11:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: HarryT</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900046062537023548" id="message-900046062537023548" title="Message sent: 19-Oct-21 11:41 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900046062281175040/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900046062281175040/unknown.png" alt="Image attachment" title="Image: unknown.png (376.45 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900046118270955561" id="message-900046118270955561" title="Message sent: 19-Oct-21 11:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description:
+-Ansaldo 65mm Twin 
+-Breda 37mm Quad
+-127mm Twin 54 MK42 DP
+-127mm Triple 54 MK42 DP
+-152mm Twin 54 MK42 DP
+-BL 6 inch / 152mm Sextuple 60Cal DP</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 11:42 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900046497415049276" id="message-900046497415049276" title="Message sent: 19-Oct-21 11:43 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900046497167577222/HarryT_Modpack.zip">
+                                        HarryT_Modpack.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    832.62 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900046548388438098" id="message-900046548388438098" title="Message sent: 19-Oct-21 11:43 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900047887621320705" id="message-900047887621320705" title="Message sent: 19-Oct-21 11:48 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">800mm Gustav Gun</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900047968877563945" id="message-900047968877563945" title="Message sent: 19-Oct-21 11:49 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Maid Nelson</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900048014050226238" id="message-900048014050226238" title="Message sent: 19-Oct-21 11:49 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900048013903396894/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900048013903396894/unknown.png" alt="Image attachment" title="Image: unknown.png (272.86 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900048121457967115" id="message-900048121457967115" title="Message sent: 19-Oct-21 11:49 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: It was developed in the late 1930s by Krupp in R&#252;genwalde as siege artillery for the explicit purpose of destroying the main forts of the French Maginot Line, the strongest fortifications in existence at the time.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900048222859452476" id="message-900048222859452476" title="Message sent: 19-Oct-21 11:50 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900048222163202108/800mm_Gustav_gun.zip">
+                                        800mm_Gustav_gun.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    3.89 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900048936029524018" id="message-900048936029524018" title="Message sent: 19-Oct-21 11:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900048977565736970" id="message-900048977565736970" title="Message sent: 19-Oct-21 11:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">41cm of Prototype Nipon Love</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900049030674010123" id="message-900049030674010123" title="Message sent: 19-Oct-21 11:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: ɅƝƉRƎƧ</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900049075406245938" id="message-900049075406245938" title="Message sent: 19-Oct-21 11:53 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900049075091693609/1.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900049075091693609/1.png" alt="Image attachment" title="Image: 1.png (1.18 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900049115080192077" id="message-900049115080192077" title="Message sent: 19-Oct-21 11:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: 
+Japanese Triple 410mm/45 3rdYear Prototype Gun + RF Version
+Japanese Triple 410mm/50 10rdYear Prototype Gun + RF Version
+Japanese Triple 410mm/50 Type 90 Prototype Gun + RF Version</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 11:54 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900049457217929276" id="message-900049457217929276" title="Message sent: 19-Oct-21 11:55 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900049456836259900/R_41cm_of_Prototype_Nipon_Love.zip">
+                                        R_41cm_of_Prototype_Nipon_Love.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    1.24 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">19-Oct-21 04:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="900116958618460210" id="message-900116958618460210" title="Message sent: 19-Oct-21 04:23 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900117175342346272" id="message-900117175342346272" title="Message sent: 19-Oct-21 04:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Last Clan Modpack v1.14</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900117209802747905" id="message-900117209802747905" title="Message sent: 19-Oct-21 04:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Oukarine</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900117370918563840" id="message-900117370918563840" title="Message sent: 19-Oct-21 04:25 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900117370645921862/20200617085025_1.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900117370645921862/20200617085025_1.png" alt="Image attachment" title="Image: 20200617085025_1.png (1 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900117547284840529" id="message-900117547284840529" title="Message sent: 19-Oct-21 04:25 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: Contains various weapons, radars, and decorations.</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 04:27 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900117598581166081" id="message-900117598581166081" title="Message sent: 19-Oct-21 04:25 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900117598442778664/Last_Clan_v114.zip">
+                                        Last_Clan_v114.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    3.89 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900118037582204988" id="message-900118037582204988" title="Message sent: 19-Oct-21 04:27 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900118132172128308" id="message-900118132172128308" title="Message sent: 19-Oct-21 04:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Last Clan Engine Modpack</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900118168578711613" id="message-900118168578711613" title="Message sent: 19-Oct-21 04:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Oukarine</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900118606938013736" id="message-900118606938013736" title="Message sent: 19-Oct-21 04:29 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900118606669574174/20210130123637_1.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900118606669574174/20210130123637_1.png" alt="Image attachment" title="Image: 20210130123637_1.png (601.25 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900118662147612703" id="message-900118662147612703" title="Message sent: 19-Oct-21 04:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: Contains various engines and funnels.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900118918956466236" id="message-900118918956466236" title="Message sent: 19-Oct-21 04:31 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900118918184706058/X.zip">
+                                        X.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    1.61 MB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">19-Oct-21 04:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="900120976518426644" id="message-900120976518426644" title="Message sent: 19-Oct-21 04:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900121109628858378" id="message-900121109628858378" title="Message sent: 19-Oct-21 04:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Detailed American Radar Module</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 04:41 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900121173650731029" id="message-900121173650731029" title="Message sent: 19-Oct-21 04:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Author: Saint Pepsi</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900121211240087622" id="message-900121211240087622" title="Message sent: 19-Oct-21 04:40 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/889577543794057276/900121211089080351/radar.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/889577543794057276/900121211089080351/radar.png" alt="Image attachment" title="Image: radar.png (25.62 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900121521836666900" id="message-900121521836666900" title="Message sent: 19-Oct-21 04:41 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Description: American Radar</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Oct-21 04:41 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900121775852126208" id="message-900121775852126208" title="Message sent: 19-Oct-21 04:42 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="https://cdn.discordapp.com/attachments/889577543794057276/900121775671746560/US_Radar_1.zip">
+                                        US_Radar_1.zip
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    123.16 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="900122516859797534" id="message-900122516859797534" title="Message sent: 19-Oct-21 04:45 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">As of now, the following modpacks cannot be stored on Discord but will have to be hosted on Google Drive:
+
+- Fronolov&#39;s Modpack
+- Assorted Modpack
+- Weapon Collection</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol"></div>
+        <div class="chatlog__reference">
+                <span class="chatlog__reference-unknown">
+                    Original message was deleted or could not be loaded.
+                </span>
+        </div>
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/693518893263749231/d029ec44214275abfe3442d03f1bb094.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Admiral_Bofors#4437" data-user-id="693518893263749231" style="color: rgb(46,204,113)">Admiral_Bofors</span>
+
+
+        <span class="chatlog__timestamp">19-Oct-21 10:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="900203903239458857" id="message-900203903239458857" title="Message sent: 19-Oct-21 10:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 172 message(s)</div>
+</div>
+
+</body>
+
+</html>
